@@ -8,19 +8,19 @@ Within my CV more detailed information about my history and background can be se
 ## Teaching Statement
 ### Teaching Experience
 I believe I have a strong background in teaching and am well prepared to participate in this program.
-#### Robotics Mentor:
+#### Robotics Mentor
 During my time as a student at the University of Wisconsin - Platteville, I was a design and controls mentor for the local FIRST Robotics Competition Team, The Cheese Curd Herd. 
 % I also served in administrative roles as Secretary and Travel Coordinator, building a lasting administrative structure to allow the college student mentors to effectively operate the team independently. 
 I began the effort to implement CAD in the design process and teaching students to use manufacturing drawings and Trello for a more robust manufacturing pipeline. 
 More importantly though, I was working directly with students in a teaching role and getting to explain the math and science concepts that have interested me for my entire life. 
-#### Lab Assistant:
+#### Lab Assistant
 While an undergraduate student I was given multiple opportunities to help in various aspects of the Engineering Program. 
 One of my first official responsibilities was to develop asynchronous lecture materials for a new online graduate course on control system fundamentals for the Electrical Engineering department. 
 During my senior year, I was a lab assistant for both the Intro to Engineering Project and the Electrical Engineering Automatic Controls labs. 
 When classes abruptly went online in Spring of 2020, I was then tasked with transitioning all the Auto Controls labs into an online format. 
 I created detailed procedures and recorded lectures for students to perform the labs by creating a Simulink model and running the same experiments. 
 This virtual lab is still being used by remote students today and hundreds of others have used my recorded lectures on YouTube to create and test their own simulations. 
-#### Teaching Assistant (TA):
+#### Teaching Assistant (TA)
 Last year was a TA for Introduction to Mechanical Engineering I and II (MECH 1100/1208) and was one of two TAs responsible for grading weekly assignments, managing the discussion boards, and answering questions for over 160 students. 
 Being online made teaching more difficult but I tried my best to help the students was ultimately awarded for my ‘outstanding contributions to undergraduate education’ as a TA. 
 Currently I am the sole TA for MECH 1100 and am responsible for grading the weekly assignments of all four sections with over 220 students. 
@@ -38,10 +38,10 @@ providing asynchronous resources like detailed lecture notes or other online ref
 providing more flexibility to students by streaming and recording all lectures; 
 ensuring that all assignments have clear and detailed grading rubrics and policies; 
 and providing students with step-by-step lab procedures in writing and video. 
-#### Technical Communication:
+#### Technical Communication
 Another important component of my teaching philosophy is a focus on technical communication. 
 I believe that it is important to teach good writing and presentation skills throughout the entire curriculum and have students write technical reports and give presentations on labs and projects in every class. 
-#### Project-based Learning:
+#### Project-based Learning
 I believe one way to improve engineering curriculum in particular, is to have more of an emphasis on project-based learning. 
 I also hope to give students the opportunity to learn through hands-on experience and practical applications in every course. 
 Specifically, I believe having flexible projects relying on work done for research, engineering competition teams, or entrepreneurial endeavors is a great way for students to learn by using concepts on projects they are genuinely interested in. 
