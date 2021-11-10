@@ -87,6 +87,7 @@
 	\frametitle{Review: Mechanical System Modeling}
 	\begin{columns}
 		\begin{column}{0.5 \textwidth}
+			\[F = m \vb{a} = m \dv{t} \vb{v} = m \dv{t} \qty(\dv{t} \vb{x})\]
 			\[
 				m \dv{t^2} x(t) 
 				= \sum F 
@@ -182,13 +183,13 @@
 	\]
 	\textbf{Sinusoidal Input:} 
 	\[
-		u(t) = cos(\omega t) = (e^{j\omega t} + e^{-j\omega t})/2 = U_0 e^{j 0}
+		u(t) = cos(\omega t) = (e^{j\omega t} + e^{-j\omega t})/2 = 1 e^{j 0}
 	\]
 	\textbf{Steady-State Output:} 
 	\[
 		y(t) = \int_{0}^{\infty} h(\tau) cos(\omega (t - \tau)) \dd \tau = A e^{j \phi} = A \cos(\omega t + \phi)
 	\]
-	where $A = U_0 \abs{H(j \omega)}$ and $\phi = \angle(H(j \omega))$.
+	where $A = \abs{H(j \omega)}$ and $\phi = \angle(H(j \omega))$.
 \end{frame}
 
 
@@ -306,6 +307,49 @@
 \end{frame}
 
 \section*{}
+
+\begin{frame}
+	\frametitle{Lecture Overview}
+	\begin{columns}
+		\begin{column}{0.25\textwidth}
+			\[
+				H(s)
+				= \frac{
+					\omega_0^2
+				}{
+					s^2 + 2 \zeta \omega_0 s + \omega_0^2
+				}
+			\]
+			\[
+				\omega_0 = \sqrt{\frac{k}{m}}
+				\quad
+				\zeta = \sqrt{\frac{c^2}{4 m k}}
+			\]
+			\begin{figure}[]
+				\includegraphics[width=\textwidth]{Images/SpringMassDamper_cartSystem.png}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.3\textwidth}
+			\[
+				\color{red}
+				u(t) = U_0 \cos(\omega t)
+			\]
+			\[
+				\color{blue}
+				y(t) = Y_0 \cos(\omega t + \phi)
+			\]
+			\begin{figure}
+				\includegraphics[width=\textwidth]{Images/phase_shift.png}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.4\textwidth}
+			\begin{figure}
+				\includegraphics[width=\textwidth]{Images/bode_demo_2.png}
+			\end{figure}
+		\end{column}
+	\end{columns}
+\end{frame}
+
 \begin{frame}[allowframebreaks]{Bibliography}
 	\bibliographystyle{unsrt}
 	\bibliography{refs}
