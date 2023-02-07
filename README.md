@@ -7,7 +7,7 @@ Within my CV more detailed information about my history and background can be se
 
 ## Teaching Statement
 ### Teaching Experience
-I believe I have a strong background in teaching and am well prepared to participate in this program.
+I believe I have a strong background in teaching and am prepared to be an instructor.
 #### Robotics Mentor
 During my time as a student at the University of Wisconsin - Platteville, I was a design and controls mentor for the local FIRST Robotics Competition Team, The Cheese Curd Herd. 
 % I also served in administrative roles as Secretary and Travel Coordinator, building a lasting administrative structure to allow the college student mentors to effectively operate the team independently. 
@@ -21,12 +21,12 @@ When classes abruptly went online in Spring of 2020, I was then tasked with tran
 I created detailed procedures and recorded lectures for students to perform the labs by creating a Simulink model and running the same experiments. 
 This virtual lab is still being used by remote students today and hundreds of others have used my recorded lectures on YouTube to create and test their own simulations. 
 #### Teaching Assistant (TA)
-Last year was a TA for Introduction to Mechanical Engineering I and II (MECH 1100/1208) and was one of two TAs responsible for grading weekly assignments, managing the discussion boards, and answering questions for over 160 students. 
+My first year as I was a TA for Introduction to Mechanical Engineering I and II (MECH 1100/1208) and was responsible for grading weekly assignments, managing the discussion boards, and answering questions for over 160 students. 
 Being online made teaching more difficult but I tried my best to help the students was ultimately awarded for my ‘outstanding contributions to undergraduate education’ as a TA. 
-Currently I am the sole TA for MECH 1100 and am responsible for grading the weekly assignments of all four sections with over 220 students. 
+Last year I was the sole TA for MECH 1100 and am responsible for grading the weekly assignments of all four sections with over 220 students. 
 During the first few weeks I also ensured labs ran smoothly until graders were assigned. 
-Being back in person this semester improves the learning experience and has allowed me to directly interact with and help students face-to-face. 
-Within my role as a TA I also am tasked with reviewing course materials and assignments each week to catch any errors and make recommendations making it easier for students to learn. 
+Being back in person improved the learning experience and allowed me to directly interact with and help students face-to-face. 
+Within my role as a TA I also was tasked with reviewing course materials and assignments each week to catch any errors and make recommendations making it easier for students to learn. 
 ### Teaching Philosophy
 My teaching philosophy has changed over the years, although my main tenets are: 
 (i) providing all students with the knowledge and resources to succeed in an accessible learning environment; 
