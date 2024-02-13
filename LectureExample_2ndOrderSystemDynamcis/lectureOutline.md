@@ -38,11 +38,13 @@ A decision and feedback (if pertinent) will be communicated to you via email.
   - Whiteboard (an option...)
     - print-out and such like in MECH 4310 review sessions?
   - Presentation
-    - Write on slides? (i.e. Shad class)
-    - Use as reference w/ whiteboard or similar
+    - Write on slides? (i.e. Shad class) <--- my preference
+    - Use as reference w/ whiteboard or similar *** (I agree mostly w/ Justin on this choice)
 - Interaction/Presentation Style
   - Being humble/laid-back/honest isn't going to work in this demo...
-  - How much 4th wall breaking? 
+    - Well mabye... just not to the same level as you did when a TA
+  - How much 4th wall breaking?
+    - Only at start and mabye the end
 - 
 
 
@@ -53,6 +55,8 @@ A decision and feedback (if pertinent) will be communicated to you via email.
 
 - Math background/into 
   - Make assumption that all math used has been discussed already? (or do we treat this like non-calc physics?... no)
+    - Yes... have understanding of differential equations and laplace transforms
+    - 
 - System introduction
   - Equation of motion modeling (assume did most before so just review?)
   - Motivation... specific system example
@@ -67,6 +71,41 @@ future/if-time?
 - steady-state response?
 - frequency response
   - make note of this? i.e. input is sinusoidal
+
+
+
+
+## Current Outline/Plan
+- Initial Setup/introduction (4th-wall break)
+  - Specific demo objective: 
+    - demonstrate ability to teach a concept: motivation -> math -> apply to example
+  - Method:
+    - Ideal in class would be real-time shared notes
+    - Use Teams to record and either use oneNote/ write on slides
+    - Demo today w/ slides and whiteboard for reliability/redundancy
+- Motivation
+  - Slides w/ Examples of Systems
+    - (From different realms...)
+    - Specific example of spring-mass-damper of suspension system (car? or something else?)
+    - Return to standard $m \ddot{x} + b \dot{x} + k x = u$
+  - Setup example on board for reference
+- Math on board
+  - Have equations on slides for setup
+  - Explain the step response
+    - e^{t} method is better intro right? (i.e. say we did this before when deriving laplace version? or do it in this one?)
+    - laplace version? (yes)
+      - derive $X(s) = H(s) U(s)$
+      - use $U(s)$ as step-response
+      - split into components for laplace table
+      - inverse Laplace in terms of $\Delta(s)$ terms
+  - **Bring it to the charectoristic polynomial**
+    - Get the response in terms of $\Delta(s)$ terms...
+- Bring back to motivating example
+  - (results laid out on slides)
+  - Have $m$, $b$, and $k$ to tune
+  - Get an intuitive understanding first before moving on (the future/not current lecture steps)
+
+
 
 
 
