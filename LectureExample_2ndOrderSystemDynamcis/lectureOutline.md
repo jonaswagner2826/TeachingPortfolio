@@ -98,8 +98,11 @@ future/if-time?
       - use $U(s)$ as step-response
       - split into components for laplace table
       - inverse Laplace in terms of $\Delta(s)$ terms
+        - (pick easy examples to do all the small details...)
   - **Bring it to the charectoristic polynomial**
     - Get the response in terms of $\Delta(s)$ terms...
+      - 2 real vs repeated vs complex roots
+      - damped, critically damped, underdamped
 - Bring back to motivating example
   - (results laid out on slides)
   - Have $m$, $b$, and $k$ to tune
@@ -107,5 +110,7 @@ future/if-time?
 
 
 
-
+Next question:
+- Do I do it in the spring-mass-damper the whole time or do derivation in genral...
+  - My answer is the general... there's a reason it's in that form
 
