@@ -80,6 +80,12 @@
 	\tableofcontents
 	\note{
 		TODO: include 4th-wall break notes
+		\begin{itemize}
+			\item Focus in this lecture demonstration will be on the process/math to demonstrate how/why a dynamical system's characteristic polynomial is crucial to the response of the system
+			\item In a larger course, the motivation of these dynamics will be explored a lot more eariler on and we'd move into getting the intuitive understanding with applied examples after this lecture
+			\item In this lecture itself, the motivation and system differential equation derivation will be brought up primarily as a refresher/review before jumping into applying the Laplace method to the example 2nd order system
+			\item 
+		\end{itemize}
 	}
 \end{frame}
 
@@ -158,97 +164,243 @@
 
 
 
-\section{Forced Response Solution}
+\section{Derivation: Laplace method to derive Step-Response}
 \begin{frame}
-	\frametitle{Derivation: Laplace method to derive Step-Response}
-	Spring-mass-damper Differential System:
+	\frametitle{Spring-mass-damper Differential Equation:}
+	\begin{align*}
+		m \ddot{x}(t) + b \dot{x}(t) + k x(t) &= f(t)\\
+		&\Downarrow \mathcal{L}\\
+		m s^2 X(s) + b s X(s) + k X(s) &= F(s)\\
+		(m s^2 + bs + k) X(s) &= F(s)
+	\end{align*}
 	\[
-		m \ddot{x}(t) + b \dot{x}(t) + k x(t) = f(t)
-		\quad \Rightarrow \quad
-		\omega_0 = \sqrt{\frac{k}{m}}
-		,
-		\zeta = \sqrt{\frac{c^2}{4 m k}}
-		,
-		u(t) = \frac{1}{m} f(t)
+		X(s) = \frac{1}{ms^2 + b s + k} F(s)
 	\]
-	2\textsuperscript{nd}-Order Dynamical System:
+
+	\textbf{Step Response:}
+	$f(t) = u(t) \overset{\mathcal{L}}{\Rightarrow} F(s) = \frac{1}{s}$
 	\[
-		\ddot{x}(t) + 2 \zeta \omega_0 \dot{x}(t) + \omega_0^2 x(t) = u(t)
+		X(s) = \frac{1}{ms^2 + b s + k} \qty(\frac{1}{s})
+		= \frac{1}{s(m s^2 + b s + k)}
+		= \frac{\frac{1}{m}}{s (s^2 + \frac{b}{m}s + \frac{k}{m})}
 	\]
+		
+	\note{
+		Call the denomenator the characteristic polynomial, and demonstrate importnace when doing the partial fraction decomposition
+
+		Characteristic Polynomial :\[
+			\Delta(s)
+			= m s^2 + b s + k
+			% \Rightarrow s^2 + \frac{b}{m} s + \frac{k}{m}
+			% = s^2 + 2 \zeta \omega_0 s + \omega_0^2
+		\]
+	}
+\end{frame}
+\begin{frame}
+	\frametitle{Factoring the characteristic polynomial}
+	In order to do the partial fraction decomposition, it must be in factored form, thus factoring via the quadratic equation: $\Delta(s) = m s^2 + b s + k$
+	\begin{align*}
+		s = \cfrac{-b \pm \sqrt{b^2 - 4mk}}{2m}
+		= -\frac{b}{2m} \pm \sqrt{\frac{b^2 -4mk}{4m^2}}
+		= -\frac{b}{2m} \pm \sqrt{\qty(\frac{b}{2m})^2 - \sqrt{\frac{k}{m}}^2}
+	\end{align*}
+	\note{This is equivalent to $\Delta(s) = s^2 + \frac{b}{m}s + \frac{k}{m}$\\}
+
+	\textbf{3 Potential cases:} %(may have learned in differential equations)
+	\begin{enumerate}
+		\item \textbf{Damped}: $(\frac{b}{2m})^2 > \frac{k}{m} \Rightarrow (s+a)(s+b)$
+		\item \textbf{Critically Damped}:$(\frac{b}{2m})^2 = \frac{k}{m} \Rightarrow (s + a)^2$
+		\item \textbf{Underdamped}: $(\frac{b}{2m})^2 < \frac{k}{m} \Rightarrow (s + \sigma \pm j \omega)$
+	\end{enumerate}
+	
+	\note{
+	This motivates the standard characteristic polynomial form:
+	\begin{align*}
+		s^2 + 2 \zeta \omega_0 s + \omega_0^2
+		\Rightarrow
+		s = \zeta \omega_0 \pm \sqrt{(\zeta \omega_0)^2 - \omega_0^2}
+		= \omega_0 \qty(\zeta \pm \sqrt{\zeta - 1})\\
+		\intertext{Let $2 \zeta \omega_n = \sqrt{\frac{b}{m}}$ and $\omega_0 = \sqrt{\frac{k}{m}}$}
+		\Delta(s) = s^2 + \frac{b}{m} s + \qty(\sqrt{\frac{k}{m}})^2
+		\iff \Delta(s) = s^2 + 2\zeta \omega_0 s + \omega_0^2
+	\end{align*}
+	In this instance, the three cases are easily seen based on $\zeta$:
+	\begin{enumerate}
+		\item Damped: $\zeta > 1$
+		\item Critically Damped: $\zeta = 1$
+		\item Underdamped: $\zeta \in [0,1)$
+	\end{enumerate}
+	}
+\end{frame}
+\begin{frame}
+	\frametitle{Case 1 (Damped)}
+	Let $a = \frac{b}{2m} + \sqrt{\qty(\frac{b}{2m})^2 - \qty(\sqrt{\frac{k}{m}})^2}$ and $b = \frac{b}{2m} - \sqrt{\qty(\frac{b}{2m})^2 - \qty(\sqrt{\frac{k}{m}})^2}$
+	\begin{gather*}
+		X(s) 
+		= \cfrac{1}{m s (s^2 + \frac{b}{m}s + \frac{k}{m})}
+		= \cfrac{\frac{1}{m}}{s(s+a)(s+b)}
+		\intertext{
+			Evaluate Coefficients:
+			$C_{i} = \eval{\frac{(s-\lambda_{i})}{m (s(s+a)(s+b))}}_{s = \lambda_{i}}$
+		}
+		X(s) = \cfrac{C_1}{s} + \cfrac{C_2}{s+a} + \cfrac{C_3}{s+b}
+		\overset{\mathcal{L}}{\iff}
+		x(t) = \qty(C_1 + C_2 e^{-at} + C_3 e^{-bt}) u(t)
+	\end{gather*}
+
+	\note{
+		% \[
+		% 	C_{1,2,3} = \eval{\cfrac{\frac{1}{m}}{s(s+a)(s+b)}(s-\lambda_{i})}_{s = \lambda_{i}}
+		% \]
+		Evaluate coeficients:
+		$(a)(b) = (\frac{b}{2m})^2 - ((\frac{b}{m})^2-\frac{k}{m}) = \frac{k}{m}$, \quad $(a-b) = 2\sqrt{(\qty(\frac{b}{2m})^2 - \frac{k}{m})}$
+		\begin{gather*}
+			C_1 = \eval{\frac{(s)}{m s(s+a)(s+b)}}_{s=0}
+			= \frac{1}{m (a)(b)}
+			\Rightarrow
+			C_1 = \frac{1}{k} \textbf{(Hook's Law @ steady-state)}
+			\\
+			C_2 = \eval{\frac{(s+a)}{m s(s+a)(s+b)}}_{s=-a}
+			= \frac{1}{m(-a)(-a+b)}
+			= \frac{1}{m(a)(a-b)}
+			\\
+			C_3 = \eval{\frac{(s+b)}{m s(s+a)(s+b)}}_{s=-b}
+			= \frac{1}{m(-b)(a-b)}
+			= \frac{-1}{m(b)(a-b)}\\
+			C_{2,3} = \cfrac{\pm 1}{2m\sqrt{(\qty(\frac{b}{2m})^2 - \frac{k}{m})} \qty(\frac{b}{2m} \pm \sqrt{\qty(\frac{b}{2m})^2 - \qty(\sqrt{\frac{k}{m}})^2})}
+		\end{gather*}
+	}
+	
 \end{frame}
 
+\begin{frame}
+	\frametitle{Case 2 (Critically Damped)}
+	Let $a = \frac{b}{2m}$
+	\begin{gather*}
+		X(s) = \cfrac{\frac{1}{m}}{s (s+a)^2} 
+		= \cfrac{C_1}{s} + \cfrac{C_2}{s+a} + \cfrac{C_3}{(s+a)^2}
+		\overset{\mathcal{L}}{\Rightarrow}
+		x(t) = \qty(C_1 + C_2 e^{-a t} + C_3 t e^{-a t}) u(t)
+	\end{gather*}
+\end{frame}
 
-\note{
-\begin{align*}
-	m \ddot{x}(t) + b \dot{x}(t) + k x(t) &= f(t)\\
-	&\Downarrow \mathcal{L}\\
-	m s^2 X(s) + b s X(s) + k X(s) &= F(s)\\
-	(m s^2 + bs + k) X(s) &= F(s)\\
-	X(s) &= \frac{1}{ms^2 + b s + k} F(s)
-	% s^2 X(s) + \frac{b}{m} s X(s) + \frac{k}{m} X(s) &= \frac{1}{m} F(s)\\
-	% \qty(s^2 + \frac{b}{m} s + \frac{k}{m}) X(s) &= \frac{1}{m} F(s)\\
-	% X(s) &= \cfrac{\frac{1}{m}}{s^2 + \frac{b}{m} s + \frac{k}{m}} F(s)\\
-	% TODO: factor it here...
-\end{align*}
-Charectoristic Polynomial :\[
-	\Delta(s)
-	= m s^2 + b s + k
-	\Rightarrow s^2 + \frac{b}{m} s + \frac{k}{m}
-	= s^2 + 2 \zeta \omega_0 s + \omega_0^2
-\]
-}
-\note{
-In order to do the partial fraction decomposition, it must be in factored form... 
-thus the quadratic equation:
-\[
-	\Delta(s) = m s^2 + b s + k = 0 
-	\Rightarrow s 
-	= \cfrac{-b \pm \sqrt{b^2 - 4mk}}{2m}
-	= \frac{b}{2m} \pm \sqrt{\frac{b^2 -4mk}{4m^2}}
-	= \frac{b}{2m} \pm \sqrt{\qty(\frac{b}{2m})^2 - \frac{k}{m}}
-\]
-
-3 Potential cases: (may have learned in differential equations)
-\begin{enumerate}
-	\item \textbf{Damped}: $(\frac{b}{2m})^2 > \frac{k}{m} \Rightarrow (s+a)(s+b)$
-	\item \textbf{Critically Damped}:$(\frac{b}{2m})^2 = \frac{k}{m} \Rightarrow (s + a)^2$
-	\item \textbf{Underdamped}: $(\frac{b}{2m})^2 < \frac{k}{m} \Rightarrow (s + \sigma \pm j \omega_d)$
-\end{enumerate}
-
-We will continue under the assumption that the system is underdamped and then return for a more general case.
-}
-\newpage
-\note{
-
-
-
-
-	Step Response: 
-	$f(t) = u(t) \overset{\mathcal{L}}{\Rightarrow} F(s) = \frac{1}{s}$
+\begin{frame}
+	\frametitle{Case 3 (Underdamped)}
+	Let $\sigma = \frac{b}{m}$ and $\omega = \sqrt{\sqrt{\frac{k}{m}}^2 - \qty(\frac{b}{2m})^2}$
+	
 	\begin{align*}
-		X(s) 
-		&= \cfrac{\frac{1}{m}}{s^2 + \frac{b}{m} s + \frac{k}{m}} \qty(\frac{1}{s})
-		= \cfrac{\frac{1}{m}}{s(s^2 + \frac{b}{m} s + \frac{k}{m})}
-		\\
-		\intertext{
-			Factored Form (quadratic formula):
-		$a s^2 + b s + c = 0 \Rightarrow s = \cfrac{-b \pm \sqrt{b^2 - 4ac}}{2a}$
-		}
-		TODO: factor it... 3 cases...
-		% X(s) &= \cfrac{\frac{1}{m}}{s (s + \cfrac{\frac{b}{m} \pm \sqrt{(\frac{b}{m})^2 - 4 \frac{k}{m}}}{2})}\\
-		\intertext{Partial Fraction Expansion}
-		X(s) &= 
+		X(s) &= \cfrac{\frac{1}{m}}{s (s+\sigma \pm j\omega)} 
+		= \cfrac{C_1}{s} + \cfrac{C_2}{(s+\sigma+j\omega)} + \cfrac{C_3}{(s+\sigma - j\omega)}\\
+		& \qquad \Updownarrow \mathcal{L}\\
+		% \overset{\mathcal{L}}{\Rightarrow}\\
+		% \overset{\mathcal{L}}{\Rightarrow}
+		x(t) &= \qty(C_1 + C_2 e^{-\sigma t}e^{j\omega t} + C_3 e^{-\sigma t} e^{-j\omega t}) u(t)\\
+		&= C_1 u(t) + 2 e^{-\sigma t} u(t) \frac{C_2 e^{j\omega t} + C_3 e^{-j\omega t}}{2}
+		\Leftarrow \textbf{Convert using Euler's Identity}
+	\end{align*}
+	
+
+\note{
+	Alternative approach
+	\begin{align*}
+		X(s) &= \cfrac{\frac{1}{m}}{s (s^2 + \frac{b}{m}s + \frac{k}{m})}
+		= \cfrac{C_1}{s} + \cfrac{C_2}{(s+\frac{b}{2m})^2 + \sqrt{\frac{k}{m}-\sqrt{\frac{b}{m}}}^2}
+		\overset{\mathcal{L}}{\Rightarrow}\\
+		&\overset{\mathcal{L}}{\Rightarrow}
+		x(t) = \qty(C_1 + \frac{C_2}{\sqrt{\frac{k}{m}-\sqrt{\frac{b}{m}}}} \exp{-\cfrac{b}{2m}t} \cos{\qty(\sqrt{\frac{k}{m}-\sqrt{\frac{b}{m}}})t}) u(t)
 	\end{align*}
 }
 
-\note{		
-	Side Note: (skip unless time allows/go back to this)
-	Looking at the original differential equation we can see how the standard form $s^2 + 2\zeta \omega_0 s + (\omega_0)^2$ would fit in as \[
-		\zeta \omega_0 \pm \sqrt{(\zeta \omega_0)^2 - \omega_0^2}
-		= \zeta \omega_0 \pm \sqrt{\omega_0^2 (\zeta^2 - 1)}
-		= \zeta \omega_0 \pm \omega_0 \sqrt{\zeta^2 - 1}
-	\]
-}
+\end{frame}
+% \note{	
+% 	Characteristic Polynomial :\[
+% 		\Delta(s)
+% 		= m s^2 + b s + k
+% 		\Rightarrow s^2 + \frac{b}{m} s + \frac{k}{m}
+% 		% = s^2 + 2 \zeta \omega_0 s + \omega_0^2
+% 	\]
+% }
+
+
+
+	
+	% 2\textsuperscript{nd}-Order Dynamical System:
+	% \[
+	% 	\ddot{x}(t) + 2 \zeta \omega_0 \dot{x}(t) + \omega_0^2 x(t) = u(t)
+	% \]
+
+
+% \note{
+
+% \begin{align*}
+% 	m \ddot{x}(t) + b \dot{x}(t) + k x(t) &= f(t)\\
+% 	&\Downarrow \mathcal{L}\\
+% 	m s^2 X(s) + b s X(s) + k X(s) &= F(s)\\
+% 	(m s^2 + bs + k) X(s) &= F(s)\\
+% 	X(s) &= \frac{1}{ms^2 + b s + k} F(s)
+% 	% s^2 X(s) + \frac{b}{m} s X(s) + \frac{k}{m} X(s) &= \frac{1}{m} F(s)\\
+% 	% \qty(s^2 + \frac{b}{m} s + \frac{k}{m}) X(s) &= \frac{1}{m} F(s)\\
+% 	% X(s) &= \cfrac{\frac{1}{m}}{s^2 + \frac{b}{m} s + \frac{k}{m}} F(s)\\
+% 	% TODO: factor it here...
+% \end{align*}
+% Charectoristic Polynomial :\[
+% 	\Delta(s)
+% 	= m s^2 + b s + k
+% 	\Rightarrow s^2 + \frac{b}{m} s + \frac{k}{m}
+% 	= s^2 + 2 \zeta \omega_0 s + \omega_0^2
+% \]
+
+% } \note{
+
+% In order to do the partial fraction decomposition, it must be in factored form... 
+% thus the quadratic equation:
+% \[
+% 	\Delta(s) = m s^2 + b s + k = 0 
+% 	\Rightarrow s 
+% 	= \cfrac{-b \pm \sqrt{b^2 - 4mk}}{2m}
+% 	= \frac{b}{2m} \pm \sqrt{\frac{b^2 -4mk}{4m^2}}
+% 	= \frac{b}{2m} \pm \sqrt{\qty(\frac{b}{2m})^2 - \frac{k}{m}}
+% \]
+
+% 3 Potential cases: (may have learned in differential equations)
+% \begin{enumerate}
+% 	\item \textbf{Damped}: $(\frac{b}{2m})^2 > \frac{k}{m} \Rightarrow (s+a)(s+b)$
+% 	\item \textbf{Critically Damped}:$(\frac{b}{2m})^2 = \frac{k}{m} \Rightarrow (s + a)^2$
+% 	\item \textbf{Underdamped}: $(\frac{b}{2m})^2 < \frac{k}{m} \Rightarrow (s + \sigma \pm j \omega_d)$
+% \end{enumerate}
+
+% We will continue under the assumption that the system is underdamped and then return for a more general case.
+
+% } 
+% \note{
+
+% Step Response: 
+% $f(t) = u(t) \overset{\mathcal{L}}{\Rightarrow} F(s) = \frac{1}{s}$
+% \begin{align*}
+% 	X(s) 
+% 	&= \cfrac{\frac{1}{m}}{s^2 + \frac{b}{m} s + \frac{k}{m}} \qty(\frac{1}{s})
+% 	= \cfrac{\frac{1}{m}}{s(s^2 + \frac{b}{m} s + \frac{k}{m})}
+% 	\\
+% 	\intertext{
+% 		Factored Form (quadratic formula):
+% 	$a s^2 + b s + c = 0 \Rightarrow s = \cfrac{-b \pm \sqrt{b^2 - 4ac}}{2a}$
+% 	}
+% 	TODO: factor it... 3 cases...
+% 	% X(s) &= \cfrac{\frac{1}{m}}{s (s + \cfrac{\frac{b}{m} \pm \sqrt{(\frac{b}{m})^2 - 4 \frac{k}{m}}}{2})}\\
+% 	\intertext{Partial Fraction Expansion}
+% 	X(s) &= 
+% \end{align*}
+
+% } \note{	
+
+% Side Note: (skip unless time allows/go back to this)
+% Looking at the original differential equation we can see how the standard form $s^2 + 2\zeta \omega_0 s + (\omega_0)^2$ would fit in as \[
+% 	\zeta \omega_0 \pm \sqrt{(\zeta \omega_0)^2 - \omega_0^2}
+% 	= \zeta \omega_0 \pm \sqrt{\omega_0^2 (\zeta^2 - 1)}
+% 	= \zeta \omega_0 \pm \omega_0 \sqrt{\zeta^2 - 1}
+% \]
+
+% }
 
 
 
@@ -437,6 +589,15 @@ We will continue under the assumption that the system is underdamped and then re
 	\frametitle{Lecture Overview}
 	\begin{columns}
 		\begin{column}{0.25\textwidth}
+			\[
+				m \ddot{x}(t) + b \dot{x}(t) + k x(t) = f(t)
+				\quad \Rightarrow \quad
+				\omega_0 = \sqrt{\frac{k}{m}}
+				,
+				\zeta = \sqrt{\frac{c^2}{4 m k}}
+				,
+				u(t) = \frac{1}{m} f(t)	
+			\]
 			\[
 				H(s)
 				= \frac{
