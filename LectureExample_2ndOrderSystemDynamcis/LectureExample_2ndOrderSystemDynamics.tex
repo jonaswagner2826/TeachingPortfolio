@@ -79,21 +79,21 @@
 \begin{frame}{Outline}
 	\tableofcontents
 	\note{
-		TODO: include 4th-wall break notes
+		4th-wall break notes
 		\begin{itemize}
 			\item Focus in this lecture demonstration will be on the process/math to demonstrate how/why a dynamical system's characteristic polynomial is crucial to the response of the system
 			\item In a larger course, the motivation of these dynamics will be explored a lot more eariler on and we'd move into getting the intuitive understanding with applied examples after this lecture
 			\item In this lecture itself, the motivation and system differential equation derivation will be brought up primarily as a refresher/review before jumping into applying the Laplace method to the example 2nd order system
-			\item 
+			\item The short time makes it difficult to do a complete introduction but hopefully this demonstration will serve as a useful snip from a random lecture
 		\end{itemize}
 	}
 \end{frame}
 
-\section{Background}
+\section{Review}
 \begin{frame}
 	\frametitle{Motivation: Real-World Dynamical System}
 	
-	TODO: add examples of dynamical systems
+	TODO: add images of dynamical systems
 
 \end{frame}
 
@@ -411,39 +411,39 @@
 
 
 
-\begin{frame}
-	\frametitle{TLDR: Second-Order System Dynamics}
-	\begin{columns}
-		\begin{column}{0.5\textwidth}
-			\textbf{Transfer Function}
-			\[
-				H(s) 
-				= \cfrac{Y(s)}{U(s)} 
-				= \cfrac{
-					\omega_0^2
-				}{
-					s^2 + 2 \zeta \omega_0 s + \omega_0^2
-				}
-			\]
-			\textbf{System Poles}
-			\[
-				s = - \zeta \omega_0 \pm \omega_0 \sqrt{1 - \zeta^2}
-			\]
-			\textbf{Spring Mass Damper System Parameters}
-			\[
-				\omega_0 = \sqrt{\cfrac{k}{m}}
-				\hspace{0.5 in}
-				\zeta = \sqrt{\cfrac{c^2}{4 m k}}
-			\]
-		\end{column}
-		\begin{column}{0.375\textwidth}
-			\begin{figure}[]
-				\includegraphics[width=\textwidth]{Images/2ndOrderTransient.png}
-				2nd Order System Response \cite{engineerOnADisk_2ndOrderDynamics}
-			\end{figure}
-		\end{column}
-	\end{columns}
-\end{frame}
+% \begin{frame}
+% 	\frametitle{TLDR: Second-Order System Dynamics}
+% 	\begin{columns}
+% 		\begin{column}{0.5\textwidth}
+% 			\textbf{Transfer Function}
+% 			\[
+% 				H(s) 
+% 				= \cfrac{Y(s)}{U(s)} 
+% 				= \cfrac{
+% 					\omega_0^2
+% 				}{
+% 					s^2 + 2 \zeta \omega_0 s + \omega_0^2
+% 				}
+% 			\]
+% 			\textbf{System Poles}
+% 			\[
+% 				s = - \zeta \omega_0 \pm \omega_0 \sqrt{1 - \zeta^2}
+% 			\]
+% 			\textbf{Spring Mass Damper System Parameters}
+% 			\[
+% 				\omega_0 = \sqrt{\cfrac{k}{m}}
+% 				\hspace{0.5 in}
+% 				\zeta = \sqrt{\cfrac{c^2}{4 m k}}
+% 			\]
+% 		\end{column}
+% 		\begin{column}{0.375\textwidth}
+% 			\begin{figure}[]
+% 				\includegraphics[width=\textwidth]{Images/2ndOrderTransient.png}
+% 				2nd Order System Response \cite{engineerOnADisk_2ndOrderDynamics}
+% 			\end{figure}
+% 		\end{column}
+% 	\end{columns}
+% \end{frame}
 
 % \section{Steady-state Forced Response}
 % \begin{frame}
@@ -587,30 +587,37 @@
 
 \begin{frame}
 	\frametitle{Lecture Overview}
+	\[
+		m \ddot{x}(t) + b \dot{x}(t) + k x(t) = f(t)
+	\]
+	\[
+		X(s) = \frac{1}{m s^2 + b s + k} F(s) 
+		= \frac{\frac{1}{m}}{s^2 + \frac{b}{m} s + \frac{k}{m}} F(s)
+	\]
 	\begin{columns}
-		\begin{column}{0.25\textwidth}
+		\begin{column}{0.5\textwidth}
 			\[
-				m \ddot{x}(t) + b \dot{x}(t) + k x(t) = f(t)
-				\quad \Rightarrow \quad
-				\omega_0 = \sqrt{\frac{k}{m}}
-				,
-				\zeta = \sqrt{\frac{c^2}{4 m k}}
-				,
-				u(t) = \frac{1}{m} f(t)	
-			\]
-			\[
-				H(s)
+				H(s) = \frac{X(s)}{U(s)}
 				= \frac{
 					\omega_0^2
 				}{
 					s^2 + 2 \zeta \omega_0 s + \omega_0^2
 				}
-			\]
-			\[
-				\omega_0 = \sqrt{\frac{k}{m}}
-				\quad
-				\zeta = \sqrt{\frac{c^2}{4 m k}}
-			\]
+			\]		
+	\[
+		\omega_0 = \sqrt{\frac{k}{m}}
+		\quad
+		\zeta = \sqrt{\frac{b^2}{4 m k}}
+		\quad
+		U(s) = \frac{1}{k} F(s)
+	\]
+			% \[
+			% 	\omega_0 = \sqrt{\frac{k}{m}}
+			% 	\quad
+			% 	\zeta = \sqrt{\frac{c^2}{4 m k}}
+			% \]
+		\end{column}
+		\begin{column}{0.25 \textwidth}
 			\begin{figure}[]
 				\includegraphics[width=\textwidth]{Images/SpringMassDamper_cartSystem.png}
 			\end{figure}
