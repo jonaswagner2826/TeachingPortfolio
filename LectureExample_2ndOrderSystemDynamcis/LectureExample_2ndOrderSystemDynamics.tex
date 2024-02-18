@@ -8,6 +8,7 @@
 \setbeameroption{show notes}
 % \setbeameroption{show notes on second screen=right}
 \setbeamertemplate{note page}[compress]
+% \pgfpagesuselayout{6 on 1}[letterpaper,border shrink=5mm]
 % \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
 
 
@@ -61,11 +62,8 @@
 
 %Presentation Info
 \title[2nd-order System Dynamics]{Introduction to 2\textsuperscript{nd}-order System Response}
-% \subtitle{Forced Step-Response, Transfer Functions, and }
 \author{Jonas Wagner}
 \institute[UTDallas]{The University of Texas at Dallas}
-% \date[ME GTF Interview - Fall 2021]{Mechanical Engineering Graduate Teaching Fellowship Teaching Example - Fall 2021}
-% Updated since original usage
 \date{}
 
 \begin{document}
@@ -99,24 +97,27 @@
 			\end{itemize}
 			\item Previous lectures:
 			\begin{itemize}
-				\item Discussed 1st order-system response and how time-constant plays into the system impulse and step-response
-				\item Taught math behind general system response (w/in time and frequency domains)
+				\item 1st order-system response and how time-constant plays into the system impulse and step-response
+				\item Solutions to differential equations (w/in time and frequency domains)
 			\end{itemize}
-			% \item In a larger course, derivation methods of the differential equation will be explored previously and following this lecture we'd focus on getting the intuitive understanding with applied examples
-			% \item In this lecture itself, the motivation and system differential equation derivation will be brought up primarily as a refresher/review before jumping into applying the Laplace method to the example 2nd order system
-			% \item The short time makes it difficult to do a complete introduction but hopefully this demonstration will serve as a useful snip from a random lecture
 		\end{itemize}
 	}
 \end{frame}
 
 \section{Motivation}
 \begin{frame}
-	\frametitle{Reminder: Real-World Dynamical Systems}
-
-	
-	
-	TODO: add images of dynamical systems
-
+	\frametitle{Real-World Dynamical Systems}
+	\begin{columns}
+		\begin{column}{0.6\linewidth}
+			\centering
+			\includegraphics[width=0.5\textwidth]{Images/LCR_circuit.png}\\
+			\includegraphics[width=0.9\textwidth]{Images/car_supension.jpg}
+		\end{column}
+		\begin{column}{0.3\linewidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{Images/Quadcopter-model-and-the-coordinate-systems-relationship.png}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 
@@ -161,12 +162,13 @@
 	}
 \end{frame}
 
+\section{Step Response}
 \begin{frame}
 	\frametitle{Step Response - 1st vs 2nd order}
 	\textbf{Step Input:}
 	$\textbf{u}(t) \overset{\mathcal{L}}{\Rightarrow} U(s) = \frac{1}{s}$\\
 	\vspace*{1em}
-	\invisible<-+>{\textbf{1\textsuperscript{st}-order:}\[
+	\visible<+->{\textbf{1\textsuperscript{st}-order:}\[
 		Y(s) = \frac{K}{\tau s + 1} \qty(\frac{1}{s})
 		\quad \overset{\mathcal{L}^{-1}}{\Rightarrow} \quad
 		y(t) = K (1 - e^{-\tau t}) \mathbf{u}(t)
@@ -174,7 +176,7 @@
 	\vspace*{1em}}
 	% show step-response from before
 	\note<+>{1st order step response discussed previously with this response... next we'll look at a 2nd order system}
-	\centering{\includegraphics<+>[width = 0.3\textwidth]{Images/step_response.jpg}}
+	\centering{\includegraphics<+| handout:0>[width = 0.3\textwidth]{Images/step_response.jpg}}
 	% \pause
 	\visible<+->{
 		\note<+>{2 roots can result in real or complex(thus sinusoidal responses)}
@@ -562,6 +564,11 @@
 \end{frame}
 
 
+\begin{frame}[allowframebreaks]{Bibliography}
+	\bibliographystyle{unsrt}
+	\bibliography{refs}
+\end{frame}
+
 
 
 \begin{frame}
@@ -597,11 +604,5 @@
 		\end{column}
 	\end{columns}
 \end{frame}
-
-\begin{frame}[allowframebreaks]{Bibliography}
-	\bibliographystyle{unsrt}
-	\bibliography{refs}
-\end{frame}
-
 
 \end{document}
