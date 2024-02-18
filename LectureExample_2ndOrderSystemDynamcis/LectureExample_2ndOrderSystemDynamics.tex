@@ -1,11 +1,15 @@
 % \documentclass[aspectratio=169]{beamer}
 % \mode<presentation>
 
-\documentclass[aspectratio=169,handout]{beamer}
+\documentclass[aspectratio=169]{beamer}
+% \documentclass[aspectratio=169,handout]{beamer}
+\usepackage{pgfpages}
 \mode<presentation>
 \setbeameroption{show notes}
-\usepackage{pgfpages}
-\pgfpagesuselayout{6 on 1}[letterpaper,border shrink=5mm]
+% \setbeameroption{show notes on second screen=right}
+\setbeamertemplate{note page}[compress]
+% \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+
 
 
 %Theme and Color of Presentation
@@ -81,34 +85,52 @@
 	\note{
 		4th-wall break notes
 		\begin{itemize}
-			\item Focus in this lecture demonstration will be on the process/math to demonstrate how/why a dynamical system's characteristic polynomial is crucial to the response of the system
-			\item In a larger course, the motivation of these dynamics will be explored a lot more eariler on and we'd move into getting the intuitive understanding with applied examples after this lecture
-			\item In this lecture itself, the motivation and system differential equation derivation will be brought up primarily as a refresher/review before jumping into applying the Laplace method to the example 2nd order system
-			\item The short time makes it difficult to do a complete introduction but hopefully this demonstration will serve as a useful snip from a random lecture
+			\item Lecture Objective:
+			% \begin{itemize}
+				% \item 
+				\textbf{why 2nd-order roots of a dynamical system's can result in more interesting responses}
+				(i.e.) the 3 cases as a result from the quadratic equation
+			% \end{itemize}
+			\item Math background/assumptions:
+			\begin{itemize}
+				\item Simple ODEs solutions are covered in prereq and explained again in the intro of this course
+				\item Specifically, Laplace transform methods and the \textbf{inverse-laplace via partial fraction expansion} will be well known to students. 
+				\item In a real course I'd spend time in lecture having students walk me through the derivation of the cases instead of leaving as an exercise/assignment.
+			\end{itemize}
+			\item Previous lectures:
+			\begin{itemize}
+				\item Discussed 1st order-system response and how time-constant plays into the system impulse and step-response
+				\item Taught math behind general system response (w/in time and frequency domains)
+			\end{itemize}
+			% \item In a larger course, derivation methods of the differential equation will be explored previously and following this lecture we'd focus on getting the intuitive understanding with applied examples
+			% \item In this lecture itself, the motivation and system differential equation derivation will be brought up primarily as a refresher/review before jumping into applying the Laplace method to the example 2nd order system
+			% \item The short time makes it difficult to do a complete introduction but hopefully this demonstration will serve as a useful snip from a random lecture
 		\end{itemize}
 	}
 \end{frame}
 
-\section{Review}
+\section{Motivation}
 \begin{frame}
-	\frametitle{Motivation: Real-World Dynamical System}
+	\frametitle{Reminder: Real-World Dynamical Systems}
 	
 	TODO: add images of dynamical systems
 
 \end{frame}
 
 
-
+\section{Review}
 \begin{frame}
-	\frametitle{Review: Spring Mass-Damper System Model}
+	\frametitle{Review: Spring Mass-Damper System Modeling}
 	\begin{columns}
 		\begin{column}{0.5 \textwidth}
+			\pause
 			Newton's 2\textsuperscript{nd} Law:
 			\[
 				F = m \vb{a} 
 				= m \dv{t} \vb{v} 
 				= m \dv{t} \qty(\dv{t} \vb{x})
 			\]
+			\pause
 			\[
 				m \dv{t^2} x(t) 
 				= \sum F 
@@ -119,6 +141,7 @@
 			% \]
 			\vspace{1em}
 
+			\pause{}
 			Differential Equation: ($\vb{x} = x(t)$, $\vb{u} = f(t)$)
 			% Let $\vb{x} = x(t)$ and $\vb{u} = f(t)$
 			\[
@@ -154,7 +177,8 @@
 			% \]
 		\end{column}
 		\begin{column}{0.375 \textwidth}
-			\begin{figure}[]
+			\onslide<1->
+			\begin{figure}
 				\includegraphics[width=\textwidth]{Images/SpringMassDamper_cartSystem.png}
 				Spring Mass Damper System \cite{ctms_engin_umich_SystemModeling}
 			\end{figure}
@@ -166,16 +190,41 @@
 
 \section{Derivation: Laplace method to derive Step-Response}
 \begin{frame}
-	\frametitle{Spring-mass-damper Differential Equation:}
-	\begin{align*}
-		m \ddot{x}(t) + b \dot{x}(t) + k x(t) &= f(t)\\
-		&\Downarrow \mathcal{L}\\
-		m s^2 X(s) + b s X(s) + k X(s) &= F(s)\\
-		(m s^2 + bs + k) X(s) &= F(s)
-	\end{align*}
+	\frametitle{Transfer Function Derivation}
+	\textbf{Spring-mass-damper Differential Equation:}
 	\[
-		X(s) = \frac{1}{ms^2 + b s + k} F(s)
+		f(t) = m \ddot{x}(t) + b \dot{x}(t) + k x(t)
+		\overset{\mathcal{L}}{\Rightarrow}
+		F(s) = m s^2 X(s) + b s X(s) + k X(s)
 	\]
+	Solve for $X(s)$ and $H(s)$
+	\[
+		F(s) = (ms^2 + b s + k) X(s)
+	\]\[
+		X(s) = \cfrac{1}{ms^2 + bs + k} F(s)
+	\]
+	
+	\begin{align*}
+		X(s) &= \frac{1}{ms^2 + b s + k} F(s)
+			&&= test
+			% = \cfrac{1}{m(s^2 + \frac{b}{m} s + \frac{k}{m})} F(s)
+			\\&
+			= \cfrac{\frac{k}{m}}{s^2 + \frac{b}{m} s + \frac{k}{m}} \qty(\frac{1}{k}) F(s)
+	\end{align*}
+	\note<+>{
+		Call the denominator the characteristic polynomial, and demonstrate importance when doing the partial fraction decomposition
+
+		Characteristic Polynomial:\[
+			\Delta(s)
+			= m s^2 + b s + k
+			% \Rightarrow s^2 + \frac{b}{m} s + \frac{k}{m}
+			% = s^2 + 2 \zeta \omega_0 s + \omega_0^2
+		\]
+	}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Factoring}
 
 	\textbf{Step Response:}
 	$f(t) = u(t) \overset{\mathcal{L}}{\Rightarrow} F(s) = \frac{1}{s}$
@@ -184,18 +233,9 @@
 		= \frac{1}{s(m s^2 + b s + k)}
 		= \frac{\frac{1}{m}}{s (s^2 + \frac{b}{m}s + \frac{k}{m})}
 	\]
-		
-	\note{
-		Call the denomenator the characteristic polynomial, and demonstrate importnace when doing the partial fraction decomposition
 
-		Characteristic Polynomial :\[
-			\Delta(s)
-			= m s^2 + b s + k
-			% \Rightarrow s^2 + \frac{b}{m} s + \frac{k}{m}
-			% = s^2 + 2 \zeta \omega_0 s + \omega_0^2
-		\]
-	}
 \end{frame}
+
 \begin{frame}
 	\frametitle{Factoring the characteristic polynomial}
 	In order to do the partial fraction decomposition, it must be in factored form, thus factoring via the quadratic equation: $\Delta(s) = m s^2 + b s + k$
@@ -643,10 +683,10 @@
 	\end{columns}
 \end{frame}
 
-% \begin{frame}[allowframebreaks]{Bibliography}
-% 	\bibliographystyle{unsrt}
-% 	\bibliography{refs}
-% \end{frame}
+\begin{frame}[allowframebreaks]{Bibliography}
+	\bibliographystyle{unsrt}
+	\bibliography{refs}
+\end{frame}
 
 
 \end{document}
