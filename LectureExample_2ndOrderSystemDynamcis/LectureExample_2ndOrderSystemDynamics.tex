@@ -112,6 +112,8 @@
 \section{Motivation}
 \begin{frame}
 	\frametitle{Reminder: Real-World Dynamical Systems}
+
+	
 	
 	TODO: add images of dynamical systems
 
@@ -123,7 +125,6 @@
 	\frametitle{Review: Spring Mass-Damper System Modeling}
 	\begin{columns}
 		\begin{column}{0.5 \textwidth}
-			\pause
 			Newton's 2\textsuperscript{nd} Law:
 			\[
 				F = m \vb{a} 
@@ -136,9 +137,6 @@
 				= \sum F 
 				= f(t) - b \dv{t} x(t) - k x(t)
 			\] 
-			% \[
-			% 	m \dv{t^2} x(t) + b \dv{t} x(t) + k \dv{t} x(t) = f(t)
-			% \]
 			\vspace{1em}
 
 			\pause{}
@@ -147,34 +145,6 @@
 			\[
 				m \ddot{\vb{x}} + c \dot{\vb{x}} + k \vb{x} = \vb{u}
 			\]
-			
-			% Let $\vb{x} = x(t)$ and $\vb{u} = f(t)$
-			% \[
-			% 	m \ddot{\vb{x}} + c \dot{\vb{x}} + k \vb{x} = \vb{u}
-			% \]
-			% \[
-			% 	\ddot{\vb{x}} 
-			% 	= \qty(\frac{-c}{m}) \dot{\vb{x}} + \qty(\frac{-k}{m}) \vb{x} + \qty(\cfrac{1}{m}) \vb{u}
-			% \]
-			% \[
-			% 	\dv{t} \mqty[
-			% 		\dot{\vb{x}}\\ 
-			% 		\vb{x}
-			% 	 ] = 
-			% 	\mqty[
-			% 		1 &0\\
-			% 		-\frac{c}{m} &-\frac{k}{m}
-			% 		] 
-			% 	\mqty[
-			% 		\dot{\vb{x}}\\
-			% 		\vb{x}
-			% 	]
-			% 	+ \mqty[
-			% 		0\\
-			% 		\frac{1}{m}
-			% 	]
-			% 	\mqty[\vb{u}]
-			% \]
 		\end{column}
 		\begin{column}{0.375 \textwidth}
 			\onslide<1->
@@ -184,76 +154,121 @@
 			\end{figure}
 		\end{column}
 	\end{columns}
-\end{frame}
-
-
-
-\section{Derivation: Laplace method to derive Step-Response}
-\begin{frame}
-	\frametitle{Transfer Function Derivation}
-	\textbf{Spring-mass-damper Differential Equation:}
-	\[
-		f(t) = m \ddot{x}(t) + b \dot{x}(t) + k x(t)
-		\overset{\mathcal{L}}{\Rightarrow}
-		F(s) = m s^2 X(s) + b s X(s) + k X(s)
-	\]
-	Solve for $X(s)$ and $H(s)$
-	\[
-		F(s) = (ms^2 + b s + k) X(s)
-	\]\[
-		X(s) = \cfrac{1}{ms^2 + bs + k} F(s)
-	\]
 	
-	\begin{align*}
-		X(s) &= \frac{1}{ms^2 + b s + k} F(s)
-			&&= test
-			% = \cfrac{1}{m(s^2 + \frac{b}{m} s + \frac{k}{m})} F(s)
-			\\&
-			= \cfrac{\frac{k}{m}}{s^2 + \frac{b}{m} s + \frac{k}{m}} \qty(\frac{1}{k}) F(s)
-	\end{align*}
-	\note<+>{
-		Call the denominator the characteristic polynomial, and demonstrate importance when doing the partial fraction decomposition
-
-		Characteristic Polynomial:\[
-			\Delta(s)
-			= m s^2 + b s + k
-			% \Rightarrow s^2 + \frac{b}{m} s + \frac{k}{m}
-			% = s^2 + 2 \zeta \omega_0 s + \omega_0^2
-		\]
+	\footnotesize{
+		Activity: 
+		\url{https://www.sccs.swarthmore.edu/users/12/abiele1/Linear/examples/simple.html}
 	}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Factoring}
-
-	\textbf{Step Response:}
-	$f(t) = u(t) \overset{\mathcal{L}}{\Rightarrow} F(s) = \frac{1}{s}$
-	\[
-		X(s) = \frac{1}{ms^2 + b s + k} \qty(\frac{1}{s})
-		= \frac{1}{s(m s^2 + b s + k)}
-		= \frac{\frac{1}{m}}{s (s^2 + \frac{b}{m}s + \frac{k}{m})}
+	\frametitle{Step Response - 1st vs 2nd order}
+	\textbf{Step Input:}
+	$\textbf{u}(t) \overset{\mathcal{L}}{\Rightarrow} U(s) = \frac{1}{s}$\\
+	\vspace*{1em}
+	\invisible<-+>{\textbf{1\textsuperscript{st}-order:}\[
+		Y(s) = \frac{K}{\tau s + 1} \qty(\frac{1}{s})
+		\quad \overset{\mathcal{L}^{-1}}{\Rightarrow} \quad
+		y(t) = K (1 - e^{-\tau t}) \mathbf{u}(t)
 	\]
+	\vspace*{1em}}
+	% show step-response from before
+	\note<+>{1st order step response discussed previously with this response... next we'll look at a 2nd order system}
+	\centering{\includegraphics<+>[width = 0.3\textwidth]{Images/step_response.jpg}}
+	% \pause
+	\visible<+->{
+		\note<+>{2 roots can result in real or complex(thus sinusoidal responses)}
+	\textbf{2\textsuperscript{nd}-order:}\[
+		Y(s) = \frac{K}{\alert<+-+(1)>{(s+p_1)(s+p_2)}} \qty(\frac{1}{s})
+		% = \frac{C_1}{s} + \frac{C_2}{s+p_1} + \frac{C_3}{s+p_2}
+		\quad \overset{\mathcal{L}^{-1}}{\Rightarrow} \quad
+		y(t) = \qty(C_1 + \alert<+>{C_2 e^{-p_1 t} + C_3 e^{-p_2 t}}) \mathbf{u}(t)
+	\]}
 
+
+	% \begin{columns}
+	% 	\begin{column}{0.7\textwidth}
+
+	% 		\textbf{2\textsuperscript{nd}-Order:}
+	% 		\[
+	% 			Y(s) = H(s) U(s) = \frac{\omega_0^2}{s^2 + 2\zeta \omega_0 s + \omega_0^2} \frac{1}{s}
+	% 		\]
+
+	% 		\[
+	% 			X(s) = \frac{1}{ms^2 + b s + k} \qty(\frac{1}{s})
+	% 			% = \frac{1}{s(m s^2 + b s + k)}
+	% 			= \frac{\frac{1}{m}}{s (s^2 + \frac{b}{m}s + \frac{k}{m})}
+	% 		\]
+	% 		(Spring-mass-damper)
+	% 	\end{column}
+	% 	\begin{column}{0.3\textwidth}
+	% 		test
+	% 	\end{column}
+	% \end{columns}
+\end{frame}
+
+\section{Applied Example: Spring Mass Damper}
+\begin{frame}
+	\frametitle{Transfer Function Derivation}
+	\textbf<-+>{Convert Differential Equation to Laplace:}
+	\[
+		f(t) = m \ddot{x}(t) + b \dot{x}(t) + k x(t)
+		\visible<+->{\alert<+>{
+			\quad \overset{\mathcal{L}}{\Rightarrow} \quad
+		F(s) = m s^2 X(s) + b s X(s) + k X(s)}
+		}
+	\]
+	\visible<+->{\textbf<+>{Solve for $X(s)$ in terms of $F(s)$}
+	\[
+		F(s) = (ms^2 + b s + k) X(s)
+	\]}
+	\visible<+->{
+	\[
+		X(s) = 
+		\alert<+>{\cfrac{1}{ms^2 + bs + k} F(s)}
+		= \cfrac{\qty(\frac{k}{k})}{m(s^2+\frac{b}{m}s+\frac{k}{m})} F(s)
+		= \cfrac{\frac{k}{m}}{s^2 + \frac{b}{m}s + \frac{k}{m}} \qty(\frac{1}{k}) F(s)
+	\]}
+	\pause
+	% \visible<+->{
+	\textbf<-+>{Transfer Function:}
+	\[
+		H(s) = \frac{X(s)}{F(s)} = \alert<+>{\qty(\frac{1}{k})} \frac{\frac{k}{m}}{s^2 + \frac{b}{m} s + \frac{k}{m}}
+	\]
+	\note<+>{Hook's Law at steady-state (The gain on a step-response to a static force)}
+	% }
+	% \note<+>{
+	% 	% \visible<+>{\alert{\textbf{$\Leftarrow$ Hook's Law}}}
+	% 	Call the denominator the characteristic polynomial, and demonstrate importance when doing the partial fraction decomposition
+
+	% 	Characteristic Polynomial:\[
+	% 		\Delta(s)
+	% 		= m s^2 + b s + k
+	% 		% \Rightarrow s^2 + \frac{b}{m} s + \frac{k}{m}
+	% 		% = s^2 + 2 \zeta \omega_0 s + \omega_0^2
+	% 	\]
+	% }
 \end{frame}
 
 \begin{frame}
 	\frametitle{Factoring the characteristic polynomial}
-	In order to do the partial fraction decomposition, it must be in factored form, thus factoring via the quadratic equation: $\Delta(s) = m s^2 + b s + k$
+	Apply the quadratic formula to find the roots of the characteristic polynomial:
+	$\Delta(s) = 0 = ms+^2+bs+k = s^2 + \frac{b}{m}s + \frac{k}{m}$.
+	% In order to do the partial fraction decomposition, it must be in factored form, thus factoring via the quadratic equation: $\Delta(s) = m s^2 + b s + k$
 	\begin{align*}
 		s = \cfrac{-b \pm \sqrt{b^2 - 4mk}}{2m}
 		= -\frac{b}{2m} \pm \sqrt{\frac{b^2 -4mk}{4m^2}}
 		= -\frac{b}{2m} \pm \sqrt{\qty(\frac{b}{2m})^2 - \sqrt{\frac{k}{m}}^2}
 	\end{align*}
-	\note{This is equivalent to $\Delta(s) = s^2 + \frac{b}{m}s + \frac{k}{m}$\\}
-
+	\pause
 	\textbf{3 Potential cases:} %(may have learned in differential equations)
-	\begin{enumerate}
+	\begin{enumerate}[<+- | alert@+>]
 		\item \textbf{Damped}: $(\frac{b}{2m})^2 > \frac{k}{m} \Rightarrow (s+a)(s+b)$
 		\item \textbf{Critically Damped}:$(\frac{b}{2m})^2 = \frac{k}{m} \Rightarrow (s + a)^2$
 		\item \textbf{Underdamped}: $(\frac{b}{2m})^2 < \frac{k}{m} \Rightarrow (s + \sigma \pm j \omega)$
 	\end{enumerate}
 	
-	\note{
+	\note<+>{
 	This motivates the standard characteristic polynomial form:
 	\begin{align*}
 		s^2 + 2 \zeta \omega_0 s + \omega_0^2
@@ -485,143 +500,6 @@
 % 	\end{columns}
 % \end{frame}
 
-% \section{Steady-state Forced Response}
-% \begin{frame}
-% 	\frametitle{Review: Steady-state Input System Response}
-% 	\begin{figure}
-% 		\centering
-% 		\includegraphics[width = 0.25\textwidth]{Images/H(s)_BlockDiagram.png}
-% 	\end{figure}
-% 	\textbf{Convolution:} 
-% 	\[
-% 		y(t) = \int_{0}^{t} h(\tau) u(t - \tau) \dd \tau 
-% 		\quad 
-% 		Y(s) = H(s) U(s)
-% 	\]
-% 	\textbf{Sinusoidal Input:} 
-% 	\[
-% 		u(t) = cos(\omega t) = (e^{j\omega t} + e^{-j\omega t})/2 = 1 e^{j 0}
-% 	\]
-% 	\textbf{Steady-State Output:} 
-% 	\[
-% 		y(t) = \int_{0}^{\infty} h(\tau) cos(\omega (t - \tau)) \dd \tau = A e^{j \phi} = A \cos(\omega t + \phi)
-% 	\]
-% 	where $A = \abs{H(j \omega)}$ and $\phi = \angle(H(j \omega))$.
-% \end{frame}
-
-
-% \begin{frame}
-% 	\frametitle{Steady-state System Response}
-% 	\begin{columns}
-% 		\begin{column}{0.3\textwidth}
-% 			\textbf{Magnitude Gain:} 
-% 			\[\abs{H(j\omega)} = \frac{Y_0}{U_0} = \frac{1.5}{2} = 0.75\]
-% 			\textbf{Phase Shift:}
-% 			\[\angle{H(j\omega)} = \phi = \frac{\pi}{4}\]
-% 		\end{column}
-% 		\begin{column}{0.5\textwidth}
-% 			\[
-% 				\color{red}
-% 				u(t) = U_0 \cos(\omega t)
-% 				\quad
-% 				\color{blue}
-% 				y(t) = Y_0 \cos(\omega t + \phi)
-% 			\]
-% 			\begin{figure}
-% 				\includegraphics[width=\textwidth]{Images/phase_shift.png}
-% 				Steady-state System Response with $\omega = 1$.
-% 			\end{figure}
-% 			\footnotesize{
-% 				\textbf{Homework 6:}
-% 				Sketch Bode Plots for given Transfer Functions
-% 				\tiny{See posted review lectures for examples}
-% 			}
-% 		\end{column}
-% 	\end{columns}
-% 	\note{
-% 		It is important to 
-% 	}
-% \end{frame}
-
-% \section{Frequency Dependent Forced Response}
-% \begin{frame}
-% 	\frametitle{Activity: Spring Mass Damper Frequency Response
-% 	\cite{swarthmore_freq_response}}
-% 	\begin{figure}
-% 		\includegraphics[width=0.625\textwidth]{Images/visualize_varied_freq_response.png}
-% 		https://www.sccs.swarthmore.edu/users/12/abiele1/Linear/examples/freq.html
-% 	\end{figure}
-% \end{frame}
-
-% \begin{frame}
-% 	\frametitle{Bode Plot}
-% 	\begin{columns}
-% 		\begin{column}{0.375\textwidth}
-% 			\textbf{Transfer Function:}
-% 			\[
-% 				H(s) 
-% 				% = \cfrac{Y(s)}{U(s)} 
-% 				= \cfrac{
-% 					\omega_0^2
-% 				}{
-% 					s^2 + 2 \zeta \omega_0 s + \omega_0^2
-% 				}
-% 			\]
-% 			\textbf{Magnitude Gain:} 
-% 			\[\abs{H(j\omega)}_{db} = 20 \log_{10} \abs{\frac{Y_0}{U_0}}\]
-% 			\textbf{Phase Shift:}
-% 			\[\angle{H(j\omega)} = \phi\]
-% 		\end{column}
-% 		\begin{column}{0.5\textwidth}
-% 			\begin{figure}
-% 				\includegraphics[width=\textwidth]{Images/bode_diagram.png}
-% 				Bode Diagram varying dampening factor, $\zeta$.
-% 			\end{figure}
-% 		\end{column}
-% 	\end{columns}
-% \end{frame}	
-
-% \begin{frame}
-% 	\frametitle{Activity: Transfer Function Frequency Response}
-% 	Investigate the system response by varying the input frequency, amplitude, and phase.
-% 	{\cite{swarthmore_bode}}
-% 	\begin{columns}
-% 		\begin{column}{0.5\textwidth}
-% 			\begin{figure}
-% 				\includegraphics[width=\textwidth]{Images/bode_demo_1.png}
-% 			\end{figure}
-% 			\footnotesize{https://lpsa.swarthmore.edu/Bode/BodeWhat.html}
-% 		\end{column}
-% 		\begin{column}{0.4\textwidth}
-% 			\begin{figure}
-% 				\includegraphics[width=\textwidth]{Images/bode_demo_2.png}
-% 			\end{figure}
-% 		\end{column}
-% 	\end{columns}
-% \end{frame}
-
-% \section{Frequency Response System Characterization}
-% \begin{frame}
-% 	\frametitle{Real-World Applications: System Characterization}
-% 	\begin{columns}
-% 		\begin{column}{0.375\textwidth}
-% 			\centering
-% 			\includegraphics[width=0.75\textwidth]{Images/sys_char_diagram.png}\\
-% 			\includegraphics[width=0.5\textwidth]{Images/sys_char_tf.png}\\
-% 			\includegraphics[width=\textwidth]{Images/sys_char_results.png}\\
-% 			\footnotesize{System Characterization Paper Results 
-% 			\cite{freq_response_charectorization}}
-% 		\end{column}
-% 		\begin{column}{0.5\textwidth}
-% 			\includegraphics[width=\textwidth]{Images/sys_char_bode_data.png}
-% 			\footnotesize{
-% 				\textbf{Lab 3:}
-% 				Experiment with selected system to obtain frequency response and characterize dynamics with an appropriate transfer function.
-% 				\tiny{See lab instructions for more details}
-% 				}
-% 		\end{column}
-% 	\end{columns}
-% \end{frame}
 
 \section*{}
 
@@ -680,6 +558,43 @@
 		% 		\includegraphics[width=\textwidth]{Images/bode_demo_2.png}
 		% 	\end{figure}
 		% \end{column}
+	\end{columns}
+\end{frame}
+
+
+
+
+\begin{frame}
+	\frametitle{TLDR: Second-Order System Dynamics}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\textbf{Transfer Function}
+			\[
+				H(s) 
+				= \cfrac{Y(s)}{U(s)} 
+				= \cfrac{
+					\omega_0^2
+				}{
+					s^2 + 2 \zeta \omega_0 s + \omega_0^2
+				}
+			\]
+			\textbf{System Poles}
+			\[
+				s = - \zeta \omega_0 \pm \omega_0 \sqrt{1 - \zeta^2}
+			\]
+			\textbf{Spring Mass Damper System Parameters}
+			\[
+				\omega_0 = \sqrt{\cfrac{k}{m}}
+				\hspace{0.5 in}
+				\zeta = \sqrt{\cfrac{c^2}{4 m k}}
+			\]
+		\end{column}
+		\begin{column}{0.375\textwidth}
+			\begin{figure}[]
+				\includegraphics[width=\textwidth]{Images/2ndOrderTransient.png}
+				2nd Order System Response \cite{engineerOnADisk_2ndOrderDynamics}
+			\end{figure}
+		\end{column}
 	\end{columns}
 \end{frame}
 
