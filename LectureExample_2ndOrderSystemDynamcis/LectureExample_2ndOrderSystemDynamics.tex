@@ -41,24 +41,25 @@
 \usepackage{textpos}
 \usepackage{hyperref}
 \usepackage{xcolor}
+% \usepackage{enumitem}
 
 %Additional Settings/Commands
 \newcommand{\extraspace}{\vskip 0.5em}
 
 \AtBeginSection[]
 {
-	\begin{frame}
+	\begin{frame}<beamer>[noframenumbering]
 		\frametitle{Outline}
 		\tableofcontents[currentsection]
 	\end{frame}
 }
-%\AtBeginSubsection[]
-%{
-%	\begin{frame}
-%		\frametitle{Outline}
-%		\tableofcontents[currentsection,currentsubsection]
-%	\end{frame}
-%}
+\AtBeginSubsection[]
+{
+	\begin{frame}<beamer>[noframenumbering]
+		\frametitle{Outline}
+		\tableofcontents[currentsection,currentsubsection]
+	\end{frame}
+}
 
 %Presentation Info
 \title[2nd-order System Dynamics]{Introduction to 2\textsuperscript{nd}-order System Response}
@@ -120,10 +121,53 @@
 	\end{columns}
 \end{frame}
 
-
-\section{Review}
+\section{Forced Response}
 \begin{frame}
-	\frametitle{Review: Spring Mass-Damper System Modeling}
+	\frametitle{Step Response - 1st vs 2nd order}
+	\begin{itemize}[<+->]
+		\item[] \textbf{Step Input:}
+			$\textbf{u}(t) \overset{\mathcal{L}}{\Rightarrow} U(s) = \frac{1}{s}$\\
+		\item[] \textbf{1\textsuperscript{st}-order:}
+		\[
+			Y(s) = \frac{K}{\alert<.(3)>{\tau s + 1}} \qty(\frac{1}{s})
+			\quad \overset{\mathcal{L}^{-1}}{\Rightarrow} \quad
+			y(t) = K (1 \alert<.(3)>{- e^{-t/\tau}}) \mathbf{u}(t)
+		\]
+		\only<+| handout:0>{\begin{center}\includegraphics[width = 0.3\textwidth]{Images/step_response_1st.jpg}\end{center}}
+		\item[] \textbf{2\textsuperscript{nd}-order:}
+		\[
+			Y(s) = \frac{K}{\alert<+->{(s+p_1)(s+p_2)}} \qty(\frac{1}{s})
+			% = \frac{C_1}{s} + \frac{C_2}{s+p_1} + \frac{C_3}{s+p_2}
+			\quad \overset{\mathcal{L}^{-1}}{\Rightarrow} \quad
+			y(t) = \qty(C_1 + \alert<.->{C_2 e^{-p_1 t} + C_3 e^{-p_2 t}}) \mathbf{u}(t)
+		\]
+	\end{itemize}
+	\only<.| handout:0>{\begin{center}
+		\alert{$\Delta(s)$ dictates transient dynamics}
+	\end{center}}
+	\only<+->{\begin{columns}
+		\begin{column}{0.4\textwidth}
+			\textbf{3 distinct cases:}
+			\begin{itemize}
+				\item<.-> Damped: \alert{$p_1 \neq p_2$}
+				\item<+-> Critically Damped: \alert{$p_1 = p_2$}
+				\item<+-> Underdamped: \alert{$p_{1,2} = \sigma \pm j \omega$}
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.4\textwidth}
+			\centering
+			\only<.(-2)| handout:0>{\includegraphics[width=0.5\columnwidth]{Images/step_response_2nd_overdamped.png}}
+			\only<.(-1)| handout:0>{\includegraphics[width=0.5\columnwidth]{Images/step_response_2nd_critdamped.png}}
+			\only<.| handout:0>{\includegraphics[width=0.5\columnwidth]{Images/step_response_2nd_underdamped.png}}
+			\only<+->{\includegraphics[width=\columnwidth]{Images/step_response_2nd.png}}
+		\end{column}
+	\end{columns}}
+\end{frame}
+
+\section{Applied Example: Spring-Mass-Damper}
+\subsection{Review: System Modeling}
+\begin{frame}
+	\frametitle{Spring Mass-Damper System Modeling}
 	\begin{columns}
 		\begin{column}{0.5 \textwidth}
 			Newton's 2\textsuperscript{nd} Law:
@@ -161,69 +205,23 @@
 		\url{https://www.sccs.swarthmore.edu/users/12/abiele1/Linear/examples/simple.html}
 	}
 \end{frame}
-
-\section{Step Response}
-\begin{frame}
-	\frametitle{Step Response - 1st vs 2nd order}
-	\textbf{Step Input:}
-	$\textbf{u}(t) \overset{\mathcal{L}}{\Rightarrow} U(s) = \frac{1}{s}$\\
-	\vspace*{1em}
-	\visible<+->{\textbf{1\textsuperscript{st}-order:}\[
-		Y(s) = \frac{K}{\tau s + 1} \qty(\frac{1}{s})
-		\quad \overset{\mathcal{L}^{-1}}{\Rightarrow} \quad
-		y(t) = K (1 - e^{-\tau t}) \mathbf{u}(t)
-	\]
-	\vspace*{1em}}
-	% show step-response from before
-	\note<+>{1st order step response discussed previously with this response... next we'll look at a 2nd order system}
-	\centering{\includegraphics<+| handout:0>[width = 0.3\textwidth]{Images/step_response.jpg}}
-	% \pause
-	\visible<+->{
-		\note<+>{2 roots can result in real or complex(thus sinusoidal responses)}
-	\textbf{2\textsuperscript{nd}-order:}\[
-		Y(s) = \frac{K}{\alert<+-+(1)>{(s+p_1)(s+p_2)}} \qty(\frac{1}{s})
-		% = \frac{C_1}{s} + \frac{C_2}{s+p_1} + \frac{C_3}{s+p_2}
-		\quad \overset{\mathcal{L}^{-1}}{\Rightarrow} \quad
-		y(t) = \qty(C_1 + \alert<+>{C_2 e^{-p_1 t} + C_3 e^{-p_2 t}}) \mathbf{u}(t)
-	\]}
-
-
-	% \begin{columns}
-	% 	\begin{column}{0.7\textwidth}
-
-	% 		\textbf{2\textsuperscript{nd}-Order:}
-	% 		\[
-	% 			Y(s) = H(s) U(s) = \frac{\omega_0^2}{s^2 + 2\zeta \omega_0 s + \omega_0^2} \frac{1}{s}
-	% 		\]
-
-	% 		\[
-	% 			X(s) = \frac{1}{ms^2 + b s + k} \qty(\frac{1}{s})
-	% 			% = \frac{1}{s(m s^2 + b s + k)}
-	% 			= \frac{\frac{1}{m}}{s (s^2 + \frac{b}{m}s + \frac{k}{m})}
-	% 		\]
-	% 		(Spring-mass-damper)
-	% 	\end{column}
-	% 	\begin{column}{0.3\textwidth}
-	% 		test
-	% 	\end{column}
-	% \end{columns}
-\end{frame}
-
-\section{Applied Example: Spring Mass Damper}
+\subsection{Derivation: Transfer Function and Step-Response}
 \begin{frame}
 	\frametitle{Transfer Function Derivation}
-	\textbf<-+>{Convert Differential Equation to Laplace:}
+	\textbf{Convert Differential Equation to Laplace:}
+	\only<.>{(Assume: $x(t) = \dot{x}(t) = 0$)}
 	\[
 		f(t) = m \ddot{x}(t) + b \dot{x}(t) + k x(t)
-		\visible<+->{\alert<+>{
+		\visible<+-| alert@+>{
 			\quad \overset{\mathcal{L}}{\Rightarrow} \quad
 		F(s) = m s^2 X(s) + b s X(s) + k X(s)}
-		}
 	\]
-	\visible<+->{\textbf<+>{Solve for $X(s)$ in terms of $F(s)$}
+	\visible<+->{
+		\textbf{Solve for $X(s)$ in terms of $F(s)$}
 	\[
 		F(s) = (ms^2 + b s + k) X(s)
-	\]}
+	\]
+	}
 	\visible<+->{
 	\[
 		X(s) = 
@@ -231,43 +229,51 @@
 		= \cfrac{\qty(\frac{k}{k})}{m(s^2+\frac{b}{m}s+\frac{k}{m})} F(s)
 		= \cfrac{\frac{k}{m}}{s^2 + \frac{b}{m}s + \frac{k}{m}} \qty(\frac{1}{k}) F(s)
 	\]}
-	\pause
-	% \visible<+->{
-	\textbf<-+>{Transfer Function:}
+	\visible<+->{
+	\textbf{Transfer Function:}
 	\[
-		H(s) = \frac{X(s)}{F(s)} = \alert<+>{\qty(\frac{1}{k})} \frac{\frac{k}{m}}{s^2 + \frac{b}{m} s + \frac{k}{m}}
+		\visible<.(1)>{\underset{\textbf{(Hook's Law)}}{\alert{F = k \Delta x}}\Rightarrow}
+		H(s) = \frac{X(s)}{F(s)} = \alert<+>{\qty(\frac{1}{k})}
+		\alert<+>{\cfrac{\frac{k}{m}}{s^2 + \frac{b}{m} s + \frac{k}{m}}}
+		\visible<.>{\Leftarrow 
+			\underset{\textbf{(Standard Form)}}{
+				\alert{\frac{\omega_0^2}{s^2 + 2\zeta\omega_0 s + \omega_0^2}}
+			}
+		}
 	\]
-	\note<+>{Hook's Law at steady-state (The gain on a step-response to a static force)}
-	% }
-	% \note<+>{
-	% 	% \visible<+>{\alert{\textbf{$\Leftarrow$ Hook's Law}}}
-	% 	Call the denominator the characteristic polynomial, and demonstrate importance when doing the partial fraction decomposition
-
-	% 	Characteristic Polynomial:\[
-	% 		\Delta(s)
-	% 		= m s^2 + b s + k
-	% 		% \Rightarrow s^2 + \frac{b}{m} s + \frac{k}{m}
-	% 		% = s^2 + 2 \zeta \omega_0 s + \omega_0^2
-	% 	\]
-	% }
+	}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Factoring the characteristic polynomial}
 	Apply the quadratic formula to find the roots of the characteristic polynomial:
-	$\Delta(s) = 0 = ms+^2+bs+k = s^2 + \frac{b}{m}s + \frac{k}{m}$.
-	% In order to do the partial fraction decomposition, it must be in factored form, thus factoring via the quadratic equation: $\Delta(s) = m s^2 + b s + k$
-	\begin{align*}
+	\[
+		\Delta(s) 
+		% = s^2 + \frac{b}{m} s + \frac{k}{m}
+		= m s^2 + b s + k
+		\quad \Rightarrow \quad
 		s = \cfrac{-b \pm \sqrt{b^2 - 4mk}}{2m}
-		= -\frac{b}{2m} \pm \sqrt{\frac{b^2 -4mk}{4m^2}}
-		= -\frac{b}{2m} \pm \sqrt{\qty(\frac{b}{2m})^2 - \sqrt{\frac{k}{m}}^2}
-	\end{align*}
+	\]
 	\pause
 	\textbf{3 Potential cases:} %(may have learned in differential equations)
 	\begin{enumerate}[<+- | alert@+>]
-		\item \textbf{Damped}: $(\frac{b}{2m})^2 > \frac{k}{m} \Rightarrow (s+a)(s+b)$
-		\item \textbf{Critically Damped}:$(\frac{b}{2m})^2 = \frac{k}{m} \Rightarrow (s + a)^2$
-		\item \textbf{Underdamped}: $(\frac{b}{2m})^2 < \frac{k}{m} \Rightarrow (s + \sigma \pm j \omega)$
+		\item \textbf{Damped}: 
+		$b^2 > 4mk \Rightarrow 
+		p_1 \neq p_2 \Rightarrow (s+p_1)(s+p_2)$
+		% p_1 = a, p_2 = b \Rightarrow (s+a)(s+b)$
+		% $(\frac{b}{2m})^2 > \frac{k}{m} \Rightarrow (s+a)(s+b)$
+		\item \textbf{Critically Damped}:
+		\(
+			b^2 = 4mk \Rightarrow p_1 = p_2 
+			\Rightarrow {(s+p_{1,2})}^2
+		\)
+		% p_1 = p_2 = a \Rightarrow (s + a)^2$
+		% $(\frac{b}{2m})^2 = \frac{k}{m} \Rightarrow (s + a)^2$
+		\item \textbf{Underdamped}: 
+		$b^2 < 4mk \Rightarrow p_{1,2} = \sigma \pm j \omega 
+		$
+		% \Rightarrow (s+\sigma +j\omega)(s + \sigma - j\omega)$
+		% $(\frac{b}{2m})^2 < \frac{k}{m} \Rightarrow (s + \sigma \pm j \omega)$
 	\end{enumerate}
 	
 	\note<+>{
@@ -289,9 +295,72 @@
 	\end{enumerate}
 	}
 \end{frame}
+% \begin{frame}
+% 	\frametitle{Factoring the characteristic polynomial}
+% 	Apply the quadratic formula to find the roots of the characteristic polynomial:
+% 	\[
+% 		\Delta(s) 
+% 		% = s^2 + \frac{b}{m} s + \frac{k}{m}
+% 		= m s^2 + b s + k
+% 		\quad \Rightarrow \quad
+% 		s = \cfrac{-b \pm \sqrt{b^2 - 4mk}}{2m}
+% 	\]
+% 	% $\Delta(s) = 0 = ms+^2+bs+k = s^2 + \frac{b}{m}s + \frac{k}{m}$.
+% 	% In order to do the partial fraction decomposition, it must be in factored form, thus factoring via the quadratic equation: $\Delta(s) = m s^2 + b s + k$
+% 	% \begin{align*}
+% 	% 	s = \cfrac{-b \pm \sqrt{b^2 - 4mk}}{2m}
+% 	% 	= -\frac{b}{2m} \pm \sqrt{\frac{b^2 -4mk}{4m^2}}
+% 	% 	= -\frac{b}{2m} \pm \sqrt{\qty(\frac{b}{2m})^2 - \sqrt{\frac{k}{m}}^2}
+% 	% \end{align*}
+% 	\pause
+% 	\textbf{3 Potential cases:} %(may have learned in differential equations)
+% 	\begin{enumerate}[<+- | alert@+>]
+% 		\item \textbf{Damped}: 
+% 		$b^2 > 4mk \Rightarrow 
+% 		p_1 \neq p_2 \Rightarrow (s+p_1)(s+p_2)$
+% 		% p_1 = a, p_2 = b \Rightarrow (s+a)(s+b)$
+% 		% $(\frac{b}{2m})^2 > \frac{k}{m} \Rightarrow (s+a)(s+b)$
+% 		\item \textbf{Critically Damped}:
+% 		\(
+% 			b^2 = 4mk \Rightarrow p_1 = p_2 
+% 			\Rightarrow {(s+p_{1,2})}^2
+% 		\)
+% 		% p_1 = p_2 = a \Rightarrow (s + a)^2$
+% 		% $(\frac{b}{2m})^2 = \frac{k}{m} \Rightarrow (s + a)^2$
+% 		\item \textbf{Underdamped}: 
+% 		$b^2 < 4mk \Rightarrow p_{1,2} = \sigma \pm j \omega 
+% 		$
+% 		% \Rightarrow (s+\sigma +j\omega)(s + \sigma - j\omega)$
+% 		% $(\frac{b}{2m})^2 < \frac{k}{m} \Rightarrow (s + \sigma \pm j \omega)$
+% 	\end{enumerate}
+	
+% 	\note<+>{
+% 	This motivates the standard characteristic polynomial form:
+% 	\begin{align*}
+% 		s^2 + 2 \zeta \omega_0 s + \omega_0^2
+% 		\Rightarrow
+% 		s = \zeta \omega_0 \pm \sqrt{(\zeta \omega_0)^2 - \omega_0^2}
+% 		= \omega_0 \qty(\zeta \pm \sqrt{\zeta - 1})\\
+% 		\intertext{Let $2 \zeta \omega_n = \sqrt{\frac{b}{m}}$ and $\omega_0 = \sqrt{\frac{k}{m}}$}
+% 		\Delta(s) = s^2 + \frac{b}{m} s + \qty(\sqrt{\frac{k}{m}})^2
+% 		\iff \Delta(s) = s^2 + 2\zeta \omega_0 s + \omega_0^2
+% 	\end{align*}
+% 	In this instance, the three cases are easily seen based on $\zeta$:
+% 	\begin{enumerate}
+% 		\item Damped: $\zeta > 1$
+% 		\item Critically Damped: $\zeta = 1$
+% 		\item Underdamped: $\zeta \in [0,1)$
+% 	\end{enumerate}
+% 	}
+% \end{frame}
+
+
+
+
+\subsection{Activity: Response Comparison}
 \begin{frame}
 	\frametitle{Case 1 (Damped)}
-	Let $a = \frac{b}{2m} + \sqrt{\qty(\frac{b}{2m})^2 - \qty(\sqrt{\frac{k}{m}})^2}$ and $b = \frac{b}{2m} - \sqrt{\qty(\frac{b}{2m})^2 - \qty(\sqrt{\frac{k}{m}})^2}$
+	% Let $a = \frac{b}{2m} + \sqrt{\qty(\frac{b}{2m})^2 - \qty(\sqrt{\frac{k}{m}})^2}$ and $b = \frac{b}{2m} - \sqrt{\qty(\frac{b}{2m})^2 - \qty(\sqrt{\frac{k}{m}})^2}$
 	\begin{gather*}
 		X(s) 
 		= \cfrac{1}{m s (s^2 + \frac{b}{m}s + \frac{k}{m})}
