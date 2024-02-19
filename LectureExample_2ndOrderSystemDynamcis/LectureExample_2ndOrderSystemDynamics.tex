@@ -212,30 +212,31 @@
 	\only<.>{(Assume: $x(t) = \dot{x}(t) = 0$)}
 	\[
 		f(t) = m \ddot{x}(t) + b \dot{x}(t) + k x(t)
-		\visible<+-| alert@+>{
+		\only<+-| alert@+>{
 			\quad \overset{\mathcal{L}}{\Rightarrow} \quad
 		F(s) = m s^2 X(s) + b s X(s) + k X(s)}
 	\]
-	\visible<+->{
+	\only<+->{
 		\textbf{Solve for $X(s)$ in terms of $F(s)$}
+	}
+	\only<.|handout:0>{
 	\[
 		F(s) = (ms^2 + b s + k) X(s)
-	\]
-	}
-	\visible<+->{
+	\]}
+	\only<+->{
 	\[
 		X(s) = 
-		\alert<+>{\cfrac{1}{ms^2 + bs + k} F(s)}
-		= \cfrac{\qty(\frac{k}{k})}{m(s^2+\frac{b}{m}s+\frac{k}{m})} F(s)
-		= \cfrac{\frac{k}{m}}{s^2 + \frac{b}{m}s + \frac{k}{m}} \qty(\frac{1}{k}) F(s)
+		\cfrac{1}{ms^2 + bs + k} F(s)
+		\only<+>{= \cfrac{1}{\alert<.>{m}(s^2+\frac{b}{m}s+\frac{k}{m})}\alert<.>{\qty(\frac{k}{k})} F(s)}
+		\only<+->{= \qty(\frac{1}{k})\cfrac{\frac{k}{m}}{s^2 + \frac{b}{m}s + \frac{k}{m}}  F(s)}
 	\]}
-	\visible<+->{
+	\only<+->{
 	\textbf{Transfer Function:}
 	\[
-		\visible<.(1)>{\underset{\textbf{(Hook's Law)}}{\alert{F = k \Delta x}}\Rightarrow}
 		H(s) = \frac{X(s)}{F(s)} = \alert<+>{\qty(\frac{1}{k})}
 		\alert<+>{\cfrac{\frac{k}{m}}{s^2 + \frac{b}{m} s + \frac{k}{m}}}
-		\visible<.>{\Leftarrow 
+		\only<.(-1)>{\Leftarrow\underset{\textbf{(Hook's Law)}}{\alert{F = k \Delta x}}}
+		\only<.>{\Leftarrow 
 			\underset{\textbf{(Standard Form)}}{
 				\alert{\frac{\omega_0^2}{s^2 + 2\zeta\omega_0 s + \omega_0^2}}
 			}
