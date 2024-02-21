@@ -1,15 +1,15 @@
 % \documentclass[aspectratio=169]{beamer}
 % \mode<presentation>
 
-\documentclass[aspectratio=169]{beamer}
-% \documentclass[aspectratio=169,handout]{beamer}
+% \documentclass[aspectratio=169]{beamer}
+\documentclass[aspectratio=169,handout]{beamer}
 \usepackage{pgfpages}
 \mode<presentation>
-% \setbeameroption{show notes}
+\setbeameroption{show notes}
 % \setbeameroption{show notes on second screen=right}
 \setbeamertemplate{note page}[compress]
 % \pgfpagesuselayout{6 on 1}[letterpaper,border shrink=5mm]
-% \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
 
 
 
@@ -87,19 +87,19 @@
 			\item Lecture Objective:
 			% \begin{itemize}
 				% \item 
-				\textbf{why 2nd-order roots of a dynamical system's can result in more interesting responses}
+				\textbf{why 2nd-order roots of a dynamical system's can result in more interesting transient dynamics}
 				(i.e.) the 3 cases as a result from the quadratic equation
 			% \end{itemize}
 			\item Math background/assumptions:
 			\begin{itemize}
-				\item Simple ODEs solutions are covered in prereq and explained again in the intro of this course
-				\item Specifically, Laplace transform methods and the \textbf{inverse-laplace via partial fraction expansion} will be well known to students. 
-				\item In a real course I'd spend time in lecture having students walk me through the derivation of the cases instead of leaving as an exercise/assignment.
+				\item Simple ODEs solutions are covered in prereq and explained ealier in this course
+				\item Laplace transform methods and the \textbf{inverse-laplace via partial fraction expansion} will be well known to students
+				\item In a real course I'd spend time in lecture having students walk me through the various derivations instead of walking through them or leaving as an exercise/assignment.
 			\end{itemize}
 			\item Previous lectures:
 			\begin{itemize}
 				\item 1st order-system response and how time-constant plays into the system impulse and step-response
-				\item Solutions to differential equations (w/in time and frequency domains)
+				\item Solutions to ODEs (w/in both time and frequency domains)
 			\end{itemize}
 		\end{itemize}
 	}
@@ -301,7 +301,7 @@
 	}
 \end{frame}
 
-\subsection{Activity: Response Comparison}
+\subsection{Derivation/Activity: Response Comparison}
 \begin{frame}
 	\frametitle{Case 1 (Damped)}
 
@@ -408,8 +408,6 @@
 \begin{frame}
 	\frametitle{Case 3 (Underdamped)}
 
-
-
 	\textbf{Complex Roots:}
 	\(
 		b^2 < 4mk \Rightarrow p_{1,2} = \sigma \pm j \omega 
@@ -483,6 +481,21 @@
 
 \end{frame}
 
+\begin{frame}
+	\frametitle{Activity: Response Comparison}
+
+	TODO:
+	\begin{enumerate}
+		\item Experiment with different $m$,$k$, and $b$ parameters to gain an intuitive understanding of how each parameter effects the response
+		\item Select one of each case and derive the functional form (i.e. solve for poles and coefficients)
+	\end{enumerate}
+
+	\extraspace
+	Online Tool:
+	\footnotesize{\url{https://www.sccs.swarthmore.edu/users/12/abiele1/Linear/examples/simple.html}}
+
+\end{frame}
+
 \section*{}
 
 \begin{frame}
@@ -544,14 +557,14 @@
 \end{frame}
 
 
-\begin{frame}[allowframebreaks]{Bibliography}
+\begin{frame}[allowframebreaks,noframenumbering]{Bibliography}
 	\bibliographystyle{unsrt}
 	\bibliography{refs}
 \end{frame}
 
 
 
-\begin{frame}
+\begin{frame}[noframenumbering]
 	\frametitle{TLDR: Second-Order System Dynamics}
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
