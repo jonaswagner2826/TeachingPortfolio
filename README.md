@@ -21,12 +21,17 @@ When classes abruptly went online in Spring of 2020, I was then tasked with tran
 I created detailed procedures and recorded lectures for students to perform the labs by creating a Simulink model and running the same experiments. 
 This virtual lab is still being used by remote students today and hundreds of others have used my recorded lectures on YouTube to create and test their own simulations. 
 #### Teaching Assistant (TA)
-My first year as I was a TA for Introduction to Mechanical Engineering I and II (MECH 1100/1208) and was responsible for grading weekly assignments, managing the discussion boards, and answering questions for over 160 students. 
-Being online made teaching more difficult but I tried my best to help the students was ultimately awarded for my ‘outstanding contributions to undergraduate education’ as a TA. 
-Last year I was the sole TA for MECH 1100 and am responsible for grading the weekly assignments of all four sections with over 220 students. 
-During the first few weeks I also ensured labs ran smoothly until graders were assigned. 
-Being back in person improved the learning experience and allowed me to directly interact with and help students face-to-face. 
-Within my role as a TA I also was tasked with reviewing course materials and assignments each week to catch any errors and make recommendations making it easier for students to learn. 
+My first year as I was a TA for Introduction to Mechanical Engineering I and II (MECH 1100/1208) and was responsible for grading weekly assignments, managing the discussion boards, and answering questions for over 160 students.
+Being online made teaching more difficult but I tried my best to help the students was ultimately awarded for my ‘outstanding contributions to undergraduate education’ as a TA.
+
+The following year I was the sole TA for MECH 1100 and am responsible for grading the weekly assignments of all four sections with over 220 students.
+During the first few weeks I also ensured labs ran smoothly until graders were assigned.
+Being back in person improved the learning experience and allowed me to directly interact with and help students face-to-face.
+Within my role as a TA I also was tasked with reviewing course materials and assignments each week to catch any errors and make recommendations making it easier for students to learn.
+
+In Fall 2023, I was given the opportunity to shadow Dr. Li while the TA for MECH 4301.
+In addition to grading the weekly homework assignments, I was tasked with providing review lectures and also proposed and managed an optional project to provide extra-credit to struggling students.
+My bi-weekly office hours were also very popular and often became recitation sessions on the homework topics.
 ### Teaching Philosophy
 My teaching philosophy has changed over the years, although my main tenets are: 
 (i) providing all students with the knowledge and resources to succeed in an accessible learning environment; 
